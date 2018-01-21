@@ -1,12 +1,39 @@
 package ru.fitnessmanager.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.hibernate.validator.constraints.NotBlank;
+
+import javax.persistence.*;
+import java.util.Set;
+
+@Entity
+@Table(name = "exercises")
 public class Exercise extends BaseEntity{
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "category_id", nullable = false)
+    @JsonBackReference(value = "a_name")
     private Category category;
 
+    @Column(name = "name", nullable = false)
+    @NotBlank
     private String name;
 
+    @Column(name = "name", nullable = false)
     private String description;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "exercise")
+    @JsonManagedReference(value = "c_name")
+    private Set<UserExercises> userExercisesSet;
+
+    public Set<UserExercises> getUserExercisesSet() {
+        return userExercisesSet;
+    }
+
+    public void setUserExercisesSet(Set<UserExercises> userExercisesSet) {
+        this.userExercisesSet = userExercisesSet;
+    }
 
     public Category getCategory() {
         return category;
