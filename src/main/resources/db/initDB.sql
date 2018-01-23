@@ -74,3 +74,6 @@ CREATE TABLE weight_control
 
 ALTER TABLE weight_control
   AUTO_INCREMENT = 1;
+
+INSERT INTO users (name, email, password)
+VALUES ('User', 'user@yandex.ru', 'password');

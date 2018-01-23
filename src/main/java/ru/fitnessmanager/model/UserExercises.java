@@ -67,4 +67,17 @@ public class UserExercises extends BaseEntity {
         this.date = date;
         this.value = value;
     }
+
+    public UserExercises() {
+    }
+
+    @Override
+    public String toString() {
+        return "UserExercises{" +
+                "user=" + user +
+                ", exercise=" + exercise +
+                ", date=" + date +
+                ", value=" + value +
+                '}';
+    }
 }

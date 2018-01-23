@@ -127,6 +127,9 @@ public class User extends BaseEntity {
 
     }
 
+    public User() {
+    }
+
     @Override
     public String toString() {
         return "User{" +

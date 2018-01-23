@@ -2,13 +2,12 @@ package ru.fitnessmanager.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
-import javax.persistence.Column;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
+@Entity
+@Table(name = "weight_control")
 public class WeightControl extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -52,5 +51,17 @@ public class WeightControl extends BaseEntity {
         this.user = user;
         this.date = date;
         this.weight = weight;
+    }
+
+    public WeightControl() {
+    }
+
+    @Override
+    public String toString() {
+        return "WeightControl{" +
+                "user=" + user +
+                ", date=" + date +
+                ", weight=" + weight +
+                '}';
     }
 }

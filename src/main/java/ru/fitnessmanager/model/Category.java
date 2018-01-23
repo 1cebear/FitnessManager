@@ -50,4 +50,15 @@ public class Category extends BaseEntity{
         this.name = name;
         this.description = description;
     }
+
+    public Category() {
+    }
+
+    @Override
+    public String toString() {
+        return "Category{" +
+                "name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                '}';
+    }
 }

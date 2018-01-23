@@ -20,7 +20,7 @@ public class Exercise extends BaseEntity{
     @NotBlank
     private String name;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "description", nullable = false)
     private String description;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "exercise")
@@ -64,6 +64,9 @@ public class Exercise extends BaseEntity{
         this.category = category;
         this.name = name;
         this.description = description;
+    }
+
+    public Exercise() {
     }
 
     @Override
