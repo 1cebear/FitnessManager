@@ -76,4 +76,8 @@ ALTER TABLE weight_control
   AUTO_INCREMENT = 1;
 
 INSERT INTO users (name, email, password)
-VALUES ('User', 'user@yandex.ru', 'password');
+VALUES ('User', 'user@yandex.ru', '$2a$04$mvsG3WbZi8UEP0qsgdX2FOrfiw32Uk75epGExcF4TPyFEZfgepFGi');
+
+INSERT INTO user_roles (role, user_id) VALUES
+  ('ROLE_USER', 1),
+  ('ROLE_ADMIN', 1);

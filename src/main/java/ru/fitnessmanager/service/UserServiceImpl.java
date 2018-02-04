@@ -3,8 +3,13 @@ package ru.fitnessmanager.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import ru.fitnessmanager.ActiveUser;
 import ru.fitnessmanager.model.User;
 import ru.fitnessmanager.repository.UserRepository;
 import ru.fitnessmanager.util.exception.NotFoundException;
@@ -15,9 +20,12 @@ import static ru.fitnessmanager.util.ValidationUtil.checkNotFound;
 import static ru.fitnessmanager.util.ValidationUtil.checkNotFoundWithId;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService, UserDetailsService {
 
     private final UserRepository repository;
+
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
     public UserServiceImpl(UserRepository repository) {
@@ -27,6 +35,7 @@ public class UserServiceImpl implements UserService {
     @CacheEvict(value = "users", allEntries = true)
     public User save(User user) {
         Assert.notNull(user, "user must not be null");
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         return repository.save(user);
     }
 
@@ -55,5 +64,13 @@ public class UserServiceImpl implements UserService {
     public void update(User user) {
         Assert.notNull(user, "user must not be null");
         repository.save(user);
+    }
+
+    public ActiveUser loadUserByUsername(String email) throws UsernameNotFoundException {
+        User u = repository.getByEmail(email.toLowerCase());
+        if (u == null) {
+            throw new UsernameNotFoundException("User " + email + " is not found");
+        }
+        return new ActiveUser(u);
     }
 }

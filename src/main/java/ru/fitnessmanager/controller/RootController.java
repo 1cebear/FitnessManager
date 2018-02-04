@@ -1,40 +1,71 @@
 package ru.fitnessmanager.controller;
 
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.support.SessionStatus;
+import ru.fitnessmanager.controller.user.AbstractUserController;
 import ru.fitnessmanager.model.User;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Controller
-public class RootController {
+public class RootController extends AbstractUserController{
 
-    private static List<User> persons = new ArrayList<User>();
-
-    static {
-        persons.add(new User(3, "test", "test", "123", true, new Date(), null));
+    @GetMapping(value = "/")
+    public String root() {
+        return "redirect:main";
     }
 
-    @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
-    public String index(Model model) {
-
-        String message = "Hello Spring Boot + JSP";
-
-        model.addAttribute("message", message);
-
+    @GetMapping(value = "/index")
+    public String login() {
         return "index";
     }
 
-    @RequestMapping(value = {"/personList"}, method = RequestMethod.GET)
-    public String viewPersonList(Model model) {
 
-        model.addAttribute("persons", persons);
+    @RequestMapping(value = "/register", method = RequestMethod.GET)
+    public String register(Model model) {
+        model.addAttribute("user", new User());
+        return "register";
+    }
 
-        return "personList";
+    @RequestMapping(value = "/main", method = RequestMethod.GET)
+    public String main(Model model) {
+        return "main";
+    }
+
+    @PostMapping("/register")
+    public String saveRegister(@Valid User user, BindingResult result, SessionStatus status, ModelMap model) {
+        if (result.hasErrors()) {
+            model.addAttribute("register", true);
+            return "register";
+        } else {
+            super.create(user);
+            status.setComplete();
+            return "redirect:index";
+        }
+    }
+
+    @RequestMapping(value="/logout", method = RequestMethod.GET)
+    public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null){
+            new SecurityContextLogoutHandler().logout(request, response, auth);
+        }
+        return "redirect:/index?logout";//You can redirect wherever you want, but generally it's a good practice to show login screen again.
     }
 }
