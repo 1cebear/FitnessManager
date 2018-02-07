@@ -21,12 +21,6 @@ public class UserExercises extends BaseEntity {
     @JsonBackReference(value = "c_name")
     private Exercise exercise;
 
-    @Column(name = "date")
-    @NotNull
-    private Date date;
-
-    @Column(name = "value")
-    private double value;
 
     public User getUser() {
         return user;
@@ -44,28 +38,12 @@ public class UserExercises extends BaseEntity {
         this.exercise = exercise;
     }
 
-    public Date getDate() {
-        return date;
-    }
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
 
-    public double getValue() {
-        return value;
-    }
-
-    public void setValue(double value) {
-        this.value = value;
-    }
-
-    public UserExercises(Integer id, User user, Exercise exercise, Date date, double value) {
+    public UserExercises(Integer id, User user, Exercise exercise) {
         super(id);
         this.user = user;
         this.exercise = exercise;
-        this.date = date;
-        this.value = value;
     }
 
     public UserExercises() {
@@ -76,8 +54,6 @@ public class UserExercises extends BaseEntity {
         return "UserExercises{" +
                 "user=" + user +
                 ", exercise=" + exercise +
-                ", date=" + date +
-                ", value=" + value +
                 '}';
     }
 }

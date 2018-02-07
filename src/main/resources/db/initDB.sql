@@ -1,6 +1,7 @@
 DROP TABLE IF EXISTS user_roles;
-DROP TABLE IF EXISTS weight_control;
 DROP TABLE IF EXISTS user_exercises;
+DROP TABLE IF EXISTS parameters;
+DROP TABLE IF EXISTS user_parameters;
 DROP TABLE IF EXISTS exercises;
 DROP TABLE IF EXISTS categories;
 DROP TABLE IF EXISTS users;
@@ -55,24 +56,34 @@ ALTER TABLE exercises
 CREATE TABLE user_exercises
 (
   id          INTEGER PRIMARY KEY AUTO_INCREMENT,
-  user_id     INTEGER   NOT NULL,
-  exercise_id INTEGER   NOT NULL,
-  date        TIMESTAMP NOT NULL,
-  value       DOUBLE    NOT NULL
+  user_id     INTEGER NOT NULL,
+  exercise_id INTEGER NOT NULL
 );
 
 ALTER TABLE user_exercises
   AUTO_INCREMENT = 1;
 
-CREATE TABLE weight_control
+
+CREATE TABLE parameters
 (
-  id      INTEGER PRIMARY KEY AUTO_INCREMENT,
-  user_id INTEGER   NOT NULL,
-  date    TIMESTAMP NOT NULL,
-  weight  DOUBLE    NOT NULL
+  id          INTEGER PRIMARY KEY AUTO_INCREMENT,
+  name        VARCHAR(100) NOT NULL,
+  description VARCHAR(100) NOT NULL
 );
 
-ALTER TABLE weight_control
+ALTER TABLE parameters
+  AUTO_INCREMENT = 1;
+
+CREATE TABLE user_parameters
+(
+  id           INTEGER PRIMARY KEY AUTO_INCREMENT,
+  user_id      INTEGER   NOT NULL,
+  parameter_id INTEGER   NOT NULL,
+  date         TIMESTAMP NOT NULL,
+  value        DOUBLE    NOT NULL
+);
+
+ALTER TABLE user_parameters
   AUTO_INCREMENT = 1;
 
 INSERT INTO users (name, email, password)
