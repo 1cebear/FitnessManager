@@ -48,6 +48,11 @@ public class RootController extends AbstractUserController{
         return "main";
     }
 
+    @RequestMapping(value = "/admin", method = RequestMethod.GET)
+    public String admin(Model model) {
+        return "admin";
+    }
+
     @PostMapping("/register")
     public String saveRegister(@Valid User user, BindingResult result, SessionStatus status, ModelMap model) {
         if (result.hasErrors()) {

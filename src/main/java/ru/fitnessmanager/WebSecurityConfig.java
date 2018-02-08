@@ -23,6 +23,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
+    @Autowired
+    private CustomAuthenticationSuccessHandler successHandler;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -40,7 +42,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginProcessingUrl("/spring_security_check")
                 .loginPage("/index").successForwardUrl("/main")
-                .defaultSuccessUrl("/main", true)
+                .defaultSuccessUrl("/main")
+                .successHandler(successHandler)
                 .permitAll()
                 .and()
                 .logout()

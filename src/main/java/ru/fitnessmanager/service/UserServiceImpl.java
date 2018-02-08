@@ -10,10 +10,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import ru.fitnessmanager.ActiveUser;
+import ru.fitnessmanager.model.Role;
 import ru.fitnessmanager.model.User;
 import ru.fitnessmanager.repository.UserRepository;
 import ru.fitnessmanager.util.exception.NotFoundException;
 
+import java.util.HashSet;
 import java.util.List;
 
 import static ru.fitnessmanager.util.ValidationUtil.checkNotFound;
@@ -36,6 +38,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public User save(User user) {
         Assert.notNull(user, "user must not be null");
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        HashSet<Role> set = new HashSet<Role>();
+        set.add(Role.ROLE_USER);
+        user.setRoles(set);
         return repository.save(user);
     }
 
