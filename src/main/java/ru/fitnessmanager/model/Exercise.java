@@ -27,6 +27,10 @@ public class Exercise extends BaseEntity{
     @JsonManagedReference(value = "c_name")
     private Set<UserExercises> userExercisesSet;
 
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "exercise")
+    @JsonManagedReference(value = "h_name")
+    private Set<Training> trainingSet;
+
     public Set<UserExercises> getUserExercisesSet() {
         return userExercisesSet;
     }

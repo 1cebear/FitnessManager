@@ -1,5 +1,6 @@
 DROP TABLE IF EXISTS user_roles;
 DROP TABLE IF EXISTS user_exercises;
+DROP TABLE IF EXISTS trainings;
 DROP TABLE IF EXISTS parameters;
 DROP TABLE IF EXISTS user_parameters;
 DROP TABLE IF EXISTS exercises;
@@ -84,6 +85,19 @@ CREATE TABLE user_parameters
 );
 
 ALTER TABLE user_parameters
+  AUTO_INCREMENT = 1;
+
+
+CREATE TABLE trainings
+(
+  id          INTEGER PRIMARY KEY AUTO_INCREMENT,
+  user_id     INTEGER NOT NULL,
+  exercise_id INTEGER NOT NULL,
+  weight      DOUBLE,
+  done        BOOL
+);
+
+ALTER TABLE trainings
   AUTO_INCREMENT = 1;
 
 INSERT INTO users (name, email, password)

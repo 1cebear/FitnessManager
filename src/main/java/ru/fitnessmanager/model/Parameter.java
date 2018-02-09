@@ -18,7 +18,7 @@ public class Parameter extends BaseEntity{
     private String description;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "parameter")
-    @JsonManagedReference(value = "e_name")
+    @JsonManagedReference(value = "f_name")
     private Set<UserParameters> userParametersSet;
 
     public Set<UserParameters> getExerciseSet() {

@@ -49,6 +49,10 @@ public class User extends BaseEntity {
     private Set<UserExercises> userExercisesSet;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+    @JsonManagedReference(value = "g_name")
+    private Set<Training> trainingSet;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
     @JsonManagedReference(value = "e_name")
     private Set<UserParameters> userParametersSet;
 
@@ -66,6 +70,14 @@ public class User extends BaseEntity {
 
     public void setUserParametersSet(Set<UserParameters> userParametersSet) {
         this.userParametersSet = userParametersSet;
+    }
+
+    public Set<Training> getTrainingSet() {
+        return trainingSet;
+    }
+
+    public void setTrainingSet(Set<Training> trainingSet) {
+        this.trainingSet = trainingSet;
     }
 
     public String getName() {

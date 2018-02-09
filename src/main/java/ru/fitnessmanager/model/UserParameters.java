@@ -17,7 +17,7 @@ public class UserParameters extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "parameter_id", nullable = false)
-    @JsonBackReference(value = "e_name")
+    @JsonBackReference(value = "f_name")
     private Parameter parameter;
 
     @Column(name = "date")
