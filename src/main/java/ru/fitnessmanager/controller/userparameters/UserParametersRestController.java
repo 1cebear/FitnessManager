@@ -50,7 +50,7 @@ public class UserParametersRestController extends AbstractUserParametersControll
         UserParameters created = super.create(userParameters, userId, parameterId);
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path(REST_URL + "/{id}")
-                .buildAndExpand(created.getId()).toUri();
+                .buildAndExpand(userId, parameterId, created.getId()).toUri();
         return ResponseEntity.created(uriOfNewResource).body(created);
     }
 }

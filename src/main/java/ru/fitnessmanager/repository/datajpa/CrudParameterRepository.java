@@ -9,16 +9,16 @@ import ru.fitnessmanager.model.Parameter;
 
 import java.util.List;
 
-@Transactional(readOnly = true)
+@Transactional(readOnly = false)
 public interface CrudParameterRepository extends JpaRepository<Parameter, Integer> {
 
     @Modifying
     @Transactional
-    @Query("DELETE FROM Category c WHERE c.id=:id")
+    @Query("DELETE FROM Parameter p WHERE p.id=:id")
     int delete(@Param("id") int id);
 
     Parameter save(Parameter parameter);
 
-    @Query("SELECT c FROM Category c")
+    @Query("SELECT p FROM Parameter p")
     List<Parameter> getAll();
 }

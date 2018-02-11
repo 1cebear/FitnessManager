@@ -9,7 +9,7 @@ import ru.fitnessmanager.model.Category;
 
 import java.util.List;
 
-@Transactional(readOnly = true)
+@Transactional(readOnly = false)
 public interface CrudCategoryRepository extends JpaRepository<Category, Integer> {
 
     @Modifying

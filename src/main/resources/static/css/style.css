@@ -1,0 +1,68 @@
+.leftTopArea {
+    position: absolute;
+    top: 10%;
+    width: 30%;
+    height: 53%;
+    border: solid 1px #CCCCCC;
+    overflow-y: scroll;
+}
+
+.leftBottomArea {
+    position: absolute;
+    top: 63%;
+    width: 30%;
+    height: 35%;
+    border: solid 1px #CCCCCC;
+    overflow-y: scroll;
+}
+
+.rightTopArea {
+    left: 30%;
+    top: 10%;
+    position: absolute;
+    overflow-y: scroll;
+    width: 70%;
+    height: 53%;
+    border: solid 1px #CCCCCC;
+}
+
+.rightBottomArea {
+    left: 30%;
+    top: 63%;
+    position: absolute;
+    width: 70%;
+    height: 35%;
+    border: solid 1px #CCCCCC;
+    overflow-y: scroll;
+}
+
+ul {
+    list-style-type: none;
+    padding-left: 0px;
+    margin-top: 0px;
+}
+
+li a {
+    text-decoration: none;
+    display: block;
+    color: #000000;
+    border-bottom: solid 1px #CCCCCC;
+    padding: 8px;
+}
+
+li a:hover {
+    background-color: #4B0A1E;
+    color: #BA8A92;
+}
+
+textarea {
+    margin-bottom: 15px;
+    margin-top: 5px;
+    height: 100%;
+    width: 100%;
+    resize: none;
+}
+
+ul.ulExercises {
+    margin-left: 40px;
+}

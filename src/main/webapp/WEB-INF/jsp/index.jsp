@@ -1,13 +1,6 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
-<head>
-    <meta charset="UTF-8" />
-    <title>Welcome</title>
-    <link rel="stylesheet" type="text/css"
-          href="/css/style.css"/>
-    <link rel="stylesheet" href="webjars/bootstrap/3.3.7-1/css/bootstrap.min.css">
-    <script type="text/javascript" src="webjars/bootstrap/3.3.7-1/js/bootstrap.min.js" defer></script>
-</head>
+<jsp:include page="fragments/headTag.jsp"/>
 <body>
 
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">

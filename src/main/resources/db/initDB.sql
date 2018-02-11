@@ -101,8 +101,12 @@ ALTER TABLE trainings
   AUTO_INCREMENT = 1;
 
 INSERT INTO users (name, email, password)
-VALUES ('User', 'user@yandex.ru', '$2a$04$mvsG3WbZi8UEP0qsgdX2FOrfiw32Uk75epGExcF4TPyFEZfgepFGi');
+VALUES ('User', 'user@yandex.ru', '$2a$04$I06EMx432IYVJ6OtVJiQQeBhh1K8/hllqyatBvci3o8wly79WMKyi');
+
+INSERT INTO users (name, email, password)
+VALUES ('Admin', 'admin@gmail.com', '$2a$04$8SOUiYCsWJ5JYjmLlCX8E.MW9FVqGDflKD6amJ7zNzGq3Uw/fDJ66');
 
 INSERT INTO user_roles (role, user_id) VALUES
   ('ROLE_USER', 1),
-  ('ROLE_ADMIN', 1);
+  ('ROLE_ADMIN', 2),
+  ('ROLE_USER', 2);

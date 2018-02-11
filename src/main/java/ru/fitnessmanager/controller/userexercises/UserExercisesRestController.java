@@ -51,7 +51,7 @@ public class UserExercisesRestController extends AbstractUserExercisesController
         UserExercises created = super.create(userExercises, userId, exerciseId);
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path(REST_URL + "/{id}")
-                .buildAndExpand(created.getId()).toUri();
+                .buildAndExpand(userId, exerciseId, created.getId()).toUri();
         return ResponseEntity.created(uriOfNewResource).body(created);
     }
 }

@@ -9,7 +9,7 @@ import ru.fitnessmanager.model.Exercise;
 
 import java.util.List;
 
-@Transactional(readOnly = true)
+@Transactional(readOnly = false)
 public interface CrudExerciseRepository extends JpaRepository<Exercise, Integer> {
 
     @Modifying

@@ -63,6 +63,14 @@ public class Exercise extends BaseEntity{
         this.description = description;
     }
 
+    public Set<Training> getTrainingSet() {
+        return trainingSet;
+    }
+
+    public void setTrainingSet(Set<Training> trainingSet) {
+        this.trainingSet = trainingSet;
+    }
+
     public Exercise(Integer id, Category category, String name, String description) {
         super(id);
         this.category = category;
