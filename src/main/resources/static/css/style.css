@@ -66,3 +66,28 @@ textarea {
 ul.ulExercises {
     margin-left: 40px;
 }
+
+table, th, td, tr {
+    border: 1px solid black;
+    text-align: center;
+    vertical-align: middle;
+}
+
+table {
+    width: 100%;
+}
+
+
+
+.done {
+    background-color: lightgreen;
+    height:100%;
+    width: 100%;
+}
+
+.planned {
+    background-color: lightgoldenrodyellow;
+    height:100%;
+    width: 100%;
+}
+

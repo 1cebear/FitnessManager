@@ -44,4 +44,9 @@ public abstract class AbstractUserExercisesController {
         checkIdConsistent(userExercises, id);
         service.update(userExercises, userId, exerciseId);
     }
+
+    public List<UserExercises> getAllForUser(int userId) {
+        log.info("getAllForUser");
+        return service.getAllForUser(userId);
+    }
 }

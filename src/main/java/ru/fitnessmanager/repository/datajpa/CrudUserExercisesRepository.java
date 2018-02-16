@@ -21,4 +21,7 @@ public interface CrudUserExercisesRepository extends JpaRepository<UserExercises
 
     @Query("SELECT e FROM UserExercises e WHERE e.exercise.id=:exerciseId AND e.user.id=:userId")
     List<UserExercises> getAll(@Param("userId") int userId, @Param("exerciseId") int exerciseId);
+
+    @Query("SELECT e FROM UserExercises e WHERE e.user.id=:userId")
+    List<UserExercises> getAllForUser(@Param("userId") int userId);
 }

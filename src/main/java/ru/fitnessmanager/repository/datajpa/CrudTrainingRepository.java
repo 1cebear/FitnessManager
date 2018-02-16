@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 import ru.fitnessmanager.model.Training;
 
+import java.util.Date;
 import java.util.List;
 
 @Transactional(readOnly = false)
@@ -21,4 +22,8 @@ public interface CrudTrainingRepository extends JpaRepository<Training, Integer>
 
     @Query("SELECT t FROM Training t WHERE t.exercise.id=:exerciseId AND t.user.id=:userId")
     List<Training> getAll(@Param("userId") int userId, @Param("exerciseId") int exerciseId);
+
+    @Query("SELECT t FROM Training t WHERE t.exercise.id=:exerciseId AND t.user.id=:userId AND t.date BETWEEN :startDate AND :endDate ORDER BY t.date ASC")
+    List<Training> getBetween(@Param("startDate") Date startDate, @Param("endDate") Date endDate, @Param("userId") int userId, @Param("exerciseId") int exerciseId);
+
 }

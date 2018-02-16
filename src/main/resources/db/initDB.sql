@@ -91,8 +91,9 @@ ALTER TABLE user_parameters
 CREATE TABLE trainings
 (
   id          INTEGER PRIMARY KEY AUTO_INCREMENT,
-  user_id     INTEGER NOT NULL,
-  exercise_id INTEGER NOT NULL,
+  user_id     INTEGER   NOT NULL,
+  exercise_id INTEGER   NOT NULL,
+  date        TIMESTAMP NOT NULL,
   weight      DOUBLE,
   done        BOOL
 );
@@ -110,3 +111,5 @@ INSERT INTO user_roles (role, user_id) VALUES
   ('ROLE_USER', 1),
   ('ROLE_ADMIN', 2),
   ('ROLE_USER', 2);
+
+

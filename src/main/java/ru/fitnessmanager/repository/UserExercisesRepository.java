@@ -14,4 +14,6 @@ public interface UserExercisesRepository {
     UserExercises get(int id, int userId, int exerciseId);
 
     List<UserExercises> getAll(int userId, int exerciseId);
+
+    List<UserExercises> getAllForUser(int userId);
 }

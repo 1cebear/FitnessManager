@@ -14,18 +14,18 @@ import java.util.List;
 @RequestMapping(value = UserExercisesRestController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class UserExercisesRestController extends AbstractUserExercisesController {
 
-    static final String REST_URL = "/rest/userexercises/{userId}/{exerciseId}";
+    static final String REST_URL = "/rest/userexercises/{userId}";
 
     @Override
     @PreAuthorize("hasRole('ROLE_USER')")
-    @GetMapping
+    @GetMapping("/{exerciseId}")
     public List<UserExercises> getAll(@PathVariable("userId") int userId, @PathVariable("exerciseId") int exerciseId) {
         return super.getAll(userId, exerciseId);
     }
 
     @Override
     @PreAuthorize("hasRole('ROLE_USER')")
-    @GetMapping("/{id}")
+    @GetMapping("/{exerciseId}/{id}")
     public UserExercises get(@PathVariable("id") int id, @PathVariable("userId") int userId, @PathVariable("exerciseId") int exerciseId) {
         return super.get(id, userId, exerciseId);
     }
@@ -33,20 +33,20 @@ public class UserExercisesRestController extends AbstractUserExercisesController
 
     @Override
     @PreAuthorize("hasRole('ROLE_USER')")
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{exerciseId}/{id}")
     public void delete(@PathVariable("id") int id, @PathVariable("userId") int userId, @PathVariable("exerciseId") int exerciseId) {
         super.delete(id, userId, exerciseId);
     }
 
     @Override
     @PreAuthorize("hasRole('ROLE_USER')")
-    @PutMapping("/{id}")
+    @PutMapping("/{exerciseId}/{id}")
     public void update(@RequestBody UserExercises userExercises, @PathVariable("id") int id, @PathVariable("userId") int userId, @PathVariable("exerciseId") int exerciseId) {
         super.update(userExercises, id, userId, exerciseId);
     }
 
     @PreAuthorize("hasRole('ROLE_USER')")
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/{exerciseId}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserExercises> createWithLocation(@RequestBody UserExercises userExercises, @PathVariable("userId") int userId, @PathVariable("exerciseId") int exerciseId) {
         UserExercises created = super.create(userExercises, userId, exerciseId);
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
@@ -54,4 +54,12 @@ public class UserExercisesRestController extends AbstractUserExercisesController
                 .buildAndExpand(userId, exerciseId, created.getId()).toUri();
         return ResponseEntity.created(uriOfNewResource).body(created);
     }
+
+    @Override
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @GetMapping
+    public List<UserExercises> getAllForUser(@PathVariable("userId") int userId) {
+        return super.getAllForUser(userId);
+    }
+
 }

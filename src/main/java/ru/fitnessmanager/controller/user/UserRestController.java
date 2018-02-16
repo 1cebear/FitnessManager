@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import ru.fitnessmanager.ActiveUser;
 import ru.fitnessmanager.model.User;
 
 import java.net.URI;
@@ -50,4 +51,11 @@ public class UserRestController extends AbstractUserController {
                 .buildAndExpand(created.getId()).toUri();
         return ResponseEntity.created(uriOfNewResource).body(created);
     }
+
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @GetMapping("/active")
+    public User getActiveUser() {
+        return super.get(ActiveUser.id());
+    }
+
 }

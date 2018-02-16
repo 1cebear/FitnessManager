@@ -7,14 +7,17 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import ru.fitnessmanager.model.Training;
 import ru.fitnessmanager.repository.TrainingRepository;
+import ru.fitnessmanager.to.TrainingTo;
 import ru.fitnessmanager.util.exception.NotFoundException;
 
+
+import java.util.Date;
 import java.util.List;
 
 import static ru.fitnessmanager.util.ValidationUtil.checkNotFoundWithId;
 
 @Service
-public class TrainingServiceImpl implements TrainingService{
+public class TrainingServiceImpl implements TrainingService {
 
     private final TrainingRepository repository;
 
@@ -49,5 +52,15 @@ public class TrainingServiceImpl implements TrainingService{
     public void update(Training training, int userId, int exerciseId) {
         Assert.notNull(training, "training must not be null");
         repository.save(training, userId, exerciseId);
+    }
+
+    @Override
+    public List<Training> getBetween(Date startDate, Date endDate, int userId, int exerciseId) {
+        return repository.getBetween(startDate, endDate, userId, exerciseId);
+    }
+
+    @Override
+    public List<TrainingTo> getTrainingsForUser(Date startDate, Date endDate, int userId) {
+        return repository.getTrainingsForUser(startDate, endDate, userId);
     }
 }

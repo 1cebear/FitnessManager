@@ -50,4 +50,10 @@ public class UserExercisesServiceImpl implements UserExercisesService {
         Assert.notNull(userExercises, "userExercises must not be null");
         repository.save(userExercises, userId, exerciseId);
     }
+
+    @Override
+    @Cacheable("userExercises")
+    public List<UserExercises> getAllForUser(int userId) {
+        return repository.getAllForUser(userId);
+    }
 }

@@ -3,6 +3,8 @@ package ru.fitnessmanager.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.util.Date;
 
 @Entity
 @Table(name = "trainings")
@@ -23,6 +25,10 @@ public class Training extends BaseEntity {
 
     @Column(name = "done", nullable = false)
     private boolean done;
+
+    @Column(name = "date")
+    @NotNull
+    private Date date;
 
     public User getUser() {
         return user;
@@ -56,14 +62,23 @@ public class Training extends BaseEntity {
         this.done = done;
     }
 
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
     public Training() {
     }
 
-    public Training(Integer id, User user, Exercise exercise, double weight, boolean done) {
+    public Training(Integer id, User user, Exercise exercise, double weight, boolean done, Date date) {
         super(id);
         this.user = user;
         this.exercise = exercise;
         this.weight = weight;
         this.done = done;
+        this.date = date;
     }
 }

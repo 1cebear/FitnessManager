@@ -16,4 +16,6 @@ public interface UserExercisesService {
     List<UserExercises> getAll(int userId, int exerciseId);
 
     void update(UserExercises userExercises, int userId, int exerciseId);
+
+    List<UserExercises> getAllForUser(int userId);
 }

@@ -5,7 +5,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.fitnessmanager.model.Training;
 import ru.fitnessmanager.service.TrainingService;
+import ru.fitnessmanager.to.TrainingTo;
 
+import java.util.Date;
 import java.util.List;
 
 import static ru.fitnessmanager.util.ValidationUtil.checkIdConsistent;
@@ -43,5 +45,13 @@ public class AbstractTrainingController {
         log.info("update {}", training);
         checkIdConsistent(training, id);
         service.update(training, userId, exerciseId);
+    }
+
+    public List<Training> getBetween(Date startDate, Date endDate, int userId, int exerciseId) {
+        return service.getBetween(startDate, endDate, userId, exerciseId);
+    }
+
+    public List<TrainingTo> getTrainingsForUser(Date startDate, Date endDate, int userId) {
+        return service.getTrainingsForUser(startDate, endDate, userId);
     }
 }

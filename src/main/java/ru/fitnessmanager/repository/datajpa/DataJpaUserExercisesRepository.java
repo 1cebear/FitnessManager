@@ -44,4 +44,9 @@ public class DataJpaUserExercisesRepository implements UserExercisesRepository {
     public List<UserExercises> getAll(int userId, int exerciseId) {
         return crudUserExercisesRepository.getAll(userId, exerciseId);
     }
+
+    @Override
+    public List<UserExercises> getAllForUser(int userId) {
+        return crudUserExercisesRepository.getAllForUser(userId);
+    }
 }

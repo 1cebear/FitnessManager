@@ -21,8 +21,8 @@ public interface CrudUserRepository extends JpaRepository<User, Integer> {
     @Transactional
     User save(User user);
 
-
-    User findOne(Integer id);
+    @Query("Select u from User u where u.id=:id")
+    User findOne(@Param("id") Integer id);
 
 
     List<User> findAll(Sort sort);
