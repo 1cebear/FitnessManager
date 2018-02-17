@@ -24,10 +24,6 @@ $(document).ready(function () {
     $('#month').val(monthArray[currentMonth]);
     $('#year').val(currentYear);
     findUser();
-    $("#test").click(function () {
-        alert("" + startDate + " - " + endDate);
-    });
-
     $('select.year').on('change', function () {
         currentYear = this.value;
         startDate = new Date(currentYear, currentMonth, 1);
@@ -41,21 +37,24 @@ $(document).ready(function () {
         refreshTable();
     });
     $("#trainingsTable").on("click", "td", function () {
-        var now = new Date(startDate.getFullYear(), startDate.getMonth(), $(this).attr("data-day"));
-        var day = ("0" + now.getDate()).slice(-2);
-        var month = ("0" + (now.getMonth() + 1)).slice(-2);
+        if ($(this).attr("data-exerciseName") != undefined)
+        {
+            var now = new Date(startDate.getFullYear(), startDate.getMonth(), $(this).attr("data-day"));
+            var day = ("0" + now.getDate()).slice(-2);
+            var month = ("0" + (now.getMonth() + 1)).slice(-2);
 
-        var today = now.getFullYear() + "-" + (month) + "-" + (day);
+            var today = now.getFullYear() + "-" + (month) + "-" + (day);
 
-        $("#Exercise").val($(this).attr("data-exerciseName"));
-        $("#ExerciseId").val($(this).attr("data-exerciseId"));
-        $("#Category").val($(this).attr("data-categoryName"));
-        $("#CategoryId").val($(this).attr("data-categoryId"));
-        $("#Weight").val($(this).attr("data-weight"));
-        $("#Date").val(today);
-        $("#Done").prop('checked', $(this).attr("data-done") == "false" ? false : true);
-        $("#trainingId").val($(this).attr("data-trainingId"));
-        $('#trainingForm').modal();
+            $("#Exercise").val($(this).attr("data-exerciseName"));
+            $("#ExerciseId").val($(this).attr("data-exerciseId"));
+            $("#Category").val($(this).attr("data-categoryName"));
+            $("#CategoryId").val($(this).attr("data-categoryId"));
+            $("#Weight").val($(this).attr("data-weight"));
+            $("#Date").val(today);
+            $("#Done").prop('checked', $(this).attr("data-done") == "false" ? false : true);
+            $("#trainingId").val($(this).attr("data-trainingId"));
+            $('#trainingForm').modal();
+        }
     });
 });
 
@@ -83,18 +82,18 @@ function refresh() {
 function refreshTable() {
     $('#trainingsTable thead th').remove();
     $('#trainingsTable tbody tr').remove();
-    $("table thead").append("<tr>");
-    $("table thead").append("<th>Category</th>");
-    $("table thead").append("<th>Exercise</th>");
+    $("#trainingsTable thead").append("<tr>");
+    $("#trainingsTable thead").append("<th>Category</th>");
+    $("#trainingsTable thead").append("<th>Exercise</th>");
     var currentDate = new Date(startDate.getTime());
     while (currentDate < endDate) {
         var curr_date = currentDate.getDate();
         var curr_month = currentDate.getMonth() + 1;
         var curr_year = currentDate.getFullYear();
-        $("table thead").append("<th>" + curr_date + "." + curr_month + " \n " + curr_year + "</th>");
+        $("#trainingsTable thead").append("<th>" + curr_date + "." + curr_month + " \n " + curr_year + "</th>");
         currentDate.setDate(currentDate.getDate() + 1);
     }
-    $("table thead").append("</tr>");
+    $("#trainingsTable thead").append("</tr>");
     findTrainings();
 }
 
@@ -148,7 +147,7 @@ function renderListTrainings(data) {
             markup += "<td data-categoryId = " + row.category.id + " data-categoryName = " + row.category.name + " data-exerciseId = " + row.exercise.id + " data-exerciseName = " + row.exercise.name + " data-weight = " + (value == null ? 0 : value.weight) + " data-trainingId = " + (value == null ? null : value.id) + " data-done = " + (value == null ? false : value.done) + " data-day = " + (i + 1) + " > " + (value == null ? " - " : training) + " </td>";
         }
         markup += "</tr>";
-        $("table tbody").append(markup);
+        $("#trainingsTable tbody").append(markup);
     });
 }
 

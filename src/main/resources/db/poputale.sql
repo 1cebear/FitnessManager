@@ -35,3 +35,9 @@ INSERT INTO user_exercises (user_id, exercise_id) VALUES
 
 INSERT INTO trainings (user_id, exercise_id, date, weight, done) VALUES
   (1, 1, '2018-2-05', 50, TRUE );
+
+INSERT INTO parameters (name, description) VALUES
+  ('Вес', ''), ('Обхват бицепса', '');
+
+INSERT INTO user_parameters (user_id, parameter_id, date, value) VALUES
+  (1, 1, '2018-2-05', 70), (1, 1, '2018-2-28', 73), (1, 2, '2018-2-01', 30), (1, 2, '2018-2-15', 32);

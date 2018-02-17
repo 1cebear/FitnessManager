@@ -2,7 +2,7 @@
 <html>
 <jsp:include page="fragments/headTag.jsp"/>
 <body>
-<script type="text/javascript" src="/js/main.js"></script>
+<script type="text/javascript" src="/js/parameters.js"></script>
 <jsp:include page="fragments/bodyHeader.jsp"/>
 <div class="jumbotron">
 
@@ -32,7 +32,7 @@
 <br>
 <br>
 <br>
-<table id="trainingsTable">
+<table id="parametersTable">
     <thead>
 
     </thead>
@@ -40,8 +40,7 @@
 
     </tbody>
 </table>
-
-<div class="modal fade" id="trainingForm">
+<div class="modal fade" id="parametersForm">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -49,24 +48,15 @@
                 <h2 class="modal-title" id="modalTitleTraining"></h2>
             </div>
             <div class="modal-body">
-                <form:form class="form-horizontal" id="trainingForm">
-                    <input type="hidden" id="trainingId" name="trainingId">
-                    <input type="hidden" id="CategoryId" name="CategoryId">
+                <form:form class="form-horizontal" id="parametersForm">
+                    <input type="hidden" id="upId" name="upId">
+                    <input type="hidden" id="ParameterId" name="ParameterId">
                     <div class="form-group">
-                        <label for="description" class="control-label col-xs-3">Category</label>
+                        <label for="description" class="control-label col-xs-3">Parameter</label>
 
                         <div class="col-xs-9">
-                            <input type="text" class="form-control" id="Category" name="Category"
-                                   placeholder="Category" readonly>
-                        </div>
-                    </div>
-                    <input type="hidden" id="ExerciseId" name="ExerciseId">
-                    <div class="form-group">
-                        <label for="description" class="control-label col-xs-3">Exercise</label>
-
-                        <div class="col-xs-9">
-                            <input type="text" class="form-control" id="Exercise" name="Exercise"
-                                   placeholder="Exercise" readonly>
+                            <input type="text" class="form-control" id="Parameter" name="Parameter"
+                                   placeholder="Parameter" readonly>
                         </div>
                     </div>
                     <div class="form-group">
@@ -78,24 +68,16 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="description" class="control-label col-xs-3">Weight</label>
+                        <label for="description" class="control-label col-xs-3">Value</label>
 
                         <div class="col-xs-9">
-                            <input type="number" class="form-control" id="Weight" name="Weight"
-                                   placeholder="Weight" step="0.01" min="0">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="description" class="control-label col-xs-3">Done</label>
-
-                        <div class="col-xs-9">
-                            <input type="checkbox" class="form-control" id="Done" name="Done"
-                                   placeholder="Done">
+                            <input type="number" class="form-control" id="UpValue" name="UpValue"
+                                   placeholder="Value" step="0.01" min="0">
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-xs-offset-3 col-xs-9">
-                            <button class="btn btn-primary" type="button" onclick="createUpdateTraining()">
+                            <button class="btn btn-primary" type="button" onclick="createUpdateUp()">
                                 <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
                             </button>
                         </div>

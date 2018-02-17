@@ -7,8 +7,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import ru.fitnessmanager.model.UserParameters;
 import ru.fitnessmanager.repository.UserParametersRepository;
+import ru.fitnessmanager.to.UserParametersTo;
 import ru.fitnessmanager.util.exception.NotFoundException;
 
+import java.util.Date;
 import java.util.List;
 
 import static ru.fitnessmanager.util.ValidationUtil.checkNotFoundWithId;
@@ -49,5 +51,10 @@ public class UserParametersServiceImpl implements UserParametersService {
     public void update(UserParameters userParameters, int userId, int parameterId) {
         Assert.notNull(userParameters, "userParameters must not be null");
         repository.save(userParameters, userId, parameterId);
+    }
+
+    @CacheEvict(value = "userParameters", allEntries = true)
+    public List<UserParametersTo> getForUser(Date startDate, Date endDate, int userId) {
+        return repository.getForUser(startDate, endDate, userId);
     }
 }

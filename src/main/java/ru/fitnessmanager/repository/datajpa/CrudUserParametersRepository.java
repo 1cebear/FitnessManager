@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 import ru.fitnessmanager.model.UserParameters;
 
+import java.util.Date;
 import java.util.List;
 
 @Transactional(readOnly = false)
@@ -21,4 +22,8 @@ public interface CrudUserParametersRepository extends JpaRepository<UserParamete
 
     @Query("SELECT up FROM UserParameters up WHERE up.user.id=:userId AND up.parameter.id=:parameterId")
     List<UserParameters> getAll(@Param("userId") int userId, @Param("parameterId") int parameterId);
+
+    @Query("SELECT up FROM UserParameters up WHERE up.user.id=:userId AND up.parameter.id=:parameterId AND up.date BETWEEN :startDate AND :endDate ORDER BY up.parameter.id, up.date ASC")
+    List<UserParameters> getBetween(@Param("startDate") Date startDate, @Param("endDate") Date endDate, @Param("userId") int userId, @Param("parameterId") int parameterId);
 }
+

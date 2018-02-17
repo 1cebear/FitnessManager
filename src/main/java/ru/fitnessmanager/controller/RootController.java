@@ -51,6 +51,15 @@ public class RootController extends AbstractUserController {
         }
     }
 
+    @RequestMapping(value = "/parameters", method = RequestMethod.GET)
+    public String parameters(Model model) {
+        if (ActiveUser.get().getUser().getRoles().contains(Role.ROLE_ADMIN)) {
+            return "redirect:admin";
+        } else {
+            return "parameters";
+        }
+    }
+
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public String admin(Model model) {
         if (ActiveUser.get().getUser().getRoles().contains(Role.ROLE_ADMIN)) {

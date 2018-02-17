@@ -5,7 +5,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.fitnessmanager.model.UserParameters;
 import ru.fitnessmanager.service.UserParametersService;
+import ru.fitnessmanager.to.UserParametersTo;
 
+import java.util.Date;
 import java.util.List;
 
 import static ru.fitnessmanager.util.ValidationUtil.checkIdConsistent;
@@ -43,6 +45,11 @@ public abstract class AbstractUserParametersController {
         log.info("update {}", userParameters);
         checkIdConsistent(userParameters, id);
         service.update(userParameters, userId, parameterId);
+    }
+
+    public List<UserParametersTo> getForUser(Date startDate, Date endDate, int userId) {
+        log.info("getForUser");
+        return service.getForUser(startDate, endDate, userId);
     }
 
 }

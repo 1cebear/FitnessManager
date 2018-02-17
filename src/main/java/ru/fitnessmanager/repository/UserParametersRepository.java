@@ -1,7 +1,9 @@
 package ru.fitnessmanager.repository;
 
 import ru.fitnessmanager.model.UserParameters;
+import ru.fitnessmanager.to.UserParametersTo;
 
+import java.util.Date;
 import java.util.List;
 
 public interface UserParametersRepository {
@@ -14,4 +16,6 @@ public interface UserParametersRepository {
     UserParameters get(int id, int userId, int parameterId);
 
     List<UserParameters> getAll(int userId, int parameterId);
+
+    List<UserParametersTo> getForUser(Date startDate, Date endDate, int userId);
 }
