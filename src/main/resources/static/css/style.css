@@ -77,17 +77,20 @@ table {
     width: 100%;
 }
 
-
-
 .done {
     background-color: lightgreen;
-    height:100%;
+    height: 100%;
     width: 100%;
 }
 
 .planned {
     background-color: lightgoldenrodyellow;
-    height:100%;
+    height: 100%;
+    width: 100%;
+}
+
+.chartContainer {
+    height: 60%;
     width: 100%;
 }
 

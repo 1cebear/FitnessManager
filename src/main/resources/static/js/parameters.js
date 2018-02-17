@@ -16,6 +16,8 @@ var endDate;
 
 var currentParameter;
 
+var graphData;
+
 refresh();
 
 $(document).ready(function () {
@@ -33,6 +35,18 @@ $(document).ready(function () {
         startDate = new Date(currentYear, currentMonth, 1);
         endDate = new Date(currentYear, currentMonth + 1, 0, 23, 59, 59);
         refreshTable();
+    });
+    $('select.viewType').on('change', function () {
+        if (this.value == "table") {
+            $('#chartContainer').prop('hidden', true);
+            $('#parametersTable').prop('hidden', false);
+            refreshTable();
+        }
+        else {
+            $('#chartContainer').prop('hidden', false);
+            $('#parametersTable').prop('hidden', true);
+            getGraphData();
+        }
     });
     $("#parametersTable").on("click", "td", function () {
         if ($(this).attr("data-parameterName") != undefined) {
@@ -207,4 +221,88 @@ function upToJSON(id) {
         "value": $("#UpValue").val(),
         "date": $("#Date").val()
     });
+}
+
+function drawGraph() {
+    var options = {
+        animationEnabled: true,
+        theme: "light2",
+        title: {
+            text: "Parameters"
+        },
+        axisX: {
+            valueFormatString: "DD MMM"
+        },
+        axisY: {
+            title: "Value",
+            suffix: "K",
+            minimum: 30
+        },
+        toolTip: {
+            shared: true
+        },
+        legend: {
+            cursor: "pointer",
+            verticalAlign: "bottom",
+            horizontalAlign: "left",
+            dockInsidePlotArea: true,
+            itemclick: toogleDataSeries
+        },
+        data: graphData
+    };
+    $("#chartContainer").CanvasJSChart(options);
+
+    function toogleDataSeries(e) {
+        if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+            e.dataSeries.visible = false;
+        } else {
+            e.dataSeries.visible = true;
+        }
+        e.chart.render();
+    }
+}
+
+function getGraphData() {
+    var startDateG = new Date(startDate.getFullYear(), 0, 1);
+    var endDateG = new Date(endDate.getFullYear(), 11, 31);
+    console.log('findParameters:');
+    $.ajax({
+        type: 'GET',
+        url: userParametersURL + "/" + currentUser.id + "/foruser/" + "?startDate=" + startDateG.getFullYear() + "-" + (startDateG.getMonth() + 1) + "-" + startDateG.getDate() + "&endDate=" + endDateG.getFullYear() + "-" + (endDateG.getMonth() + 1) + "-" + endDateG.getDate(),
+        dataType: "json", // data type of response
+        success: renderGraphData,
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert('findParameters error: ' + textStatus);
+        }
+    });
+}
+
+function renderGraphData(data) {
+    var list = data == null ? [] : (data instanceof Array ? data : [data]);
+    graphData = [];
+    $.each(list, function (index, row) {
+        var dataPoints = [];
+        for (var i = 0; i < row.userParametersList.length; i++) {
+            value = row.userParametersList[i];
+            if (value != null) {
+                dataPoints.push(
+                    {
+                        x: new Date(value.date),
+                        y: value.value
+                    }
+                )
+            }
+        }
+        graphData.push(
+            {
+                type: "line",
+                showInLegend: true,
+                name: row.parameter.name,
+                xValueFormatString: "DD MMM, YYYY",
+                yValueFormatString: "#,##",
+                dataPoints: dataPoints
+            }
+        )
+    });
+    drawGraph();
 }

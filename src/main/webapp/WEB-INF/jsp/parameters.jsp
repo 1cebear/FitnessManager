@@ -29,6 +29,10 @@
     <option value="2019">2019</option>
     <option value="2020">2020</option>
 </select>
+<select class="viewType" name="viewType" id="viewType">
+    <option value="table">Table</option>
+    <option value="graph">Graph </option>
+</select>
 <br>
 <br>
 <br>
@@ -40,6 +44,10 @@
 
     </tbody>
 </table>
+<br>
+<br>
+<br>
+<div id="chartContainer"></div>
 <div class="modal fade" id="parametersForm">
     <div class="modal-dialog">
         <div class="modal-content">
