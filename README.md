@@ -1,5 +1,7 @@
 # FitnessManager
 Spring boot, spring security, hibernate, mysql
+
+
 Задание:
 Написать приложение, позволяющее отслеживать процесс тренировок
 
