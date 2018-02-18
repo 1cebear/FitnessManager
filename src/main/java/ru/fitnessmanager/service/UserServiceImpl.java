@@ -68,6 +68,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @CacheEvict(value = "users", allEntries = true)
     public void update(User user) {
         Assert.notNull(user, "user must not be null");
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         repository.save(user);
     }
 

@@ -21,7 +21,7 @@ public class DataJpaUserExercisesRepository implements UserExercisesRepository {
 
     @Override
     public UserExercises save(UserExercises userExercises, int userId, int exerciseId) {
-        if (userExercises != null && get(userExercises.getId(), userId, exerciseId) == null) {
+        if (!userExercises.isNew() && get(userExercises.getId(), userId, exerciseId) == null) {
             return null;
         }
         userExercises.setExercise(crudExerciseRepository.getOne(exerciseId));

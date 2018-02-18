@@ -60,6 +60,11 @@ public class RootController extends AbstractUserController {
         }
     }
 
+    @RequestMapping(value = "/profile", method = RequestMethod.GET)
+    public String profile(Model model) {
+        return "profile";
+    }
+
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public String admin(Model model) {
         if (ActiveUser.get().getUser().getRoles().contains(Role.ROLE_ADMIN)) {

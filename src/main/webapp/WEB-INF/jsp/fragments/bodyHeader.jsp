@@ -11,6 +11,9 @@
         <sec:authorize access="!hasRole('ROLE_ADMIN')">
             <a href="/parameters" class="navbar-brand">Parameters</a>
         </sec:authorize>
+        <sec:authorize access="!hasRole('ROLE_ADMIN')">
+            <a href="/profile" class="navbar-brand">Profile</a>
+        </sec:authorize>
         <div class="collapse navbar-collapse">
             <form class="navbar-form navbar-right">
 

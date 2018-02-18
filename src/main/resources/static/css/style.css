@@ -36,6 +36,15 @@
     overflow-y: scroll;
 }
 
+.bottomArea {
+    position: absolute;
+    top: 63%;
+    width: 100%;
+    height: 35%;
+    border: solid 1px #CCCCCC;
+    overflow-y: scroll;
+}
+
 ul {
     list-style-type: none;
     padding-left: 0px;

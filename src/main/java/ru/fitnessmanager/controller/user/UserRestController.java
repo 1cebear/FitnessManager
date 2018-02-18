@@ -37,7 +37,7 @@ public class UserRestController extends AbstractUserController {
     }
 
     @Override
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_USER')")
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public void update(@RequestBody User user, @PathVariable("id") int id) {
         super.update(user, id);
