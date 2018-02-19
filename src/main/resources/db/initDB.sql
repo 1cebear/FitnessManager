@@ -102,10 +102,10 @@ ALTER TABLE trainings
   AUTO_INCREMENT = 1;
 
 INSERT INTO users (name, email, password)
-VALUES ('User', 'user@yandex.ru', '$2a$04$I06EMx432IYVJ6OtVJiQQeBhh1K8/hllqyatBvci3o8wly79WMKyi');
+VALUES ('User', 'user@yandex.ru', '$2a$04$I06EMx432IYVJ6OtVJiQQeBhh1K8/hllqyatBvci3o8wly79WMKyi'); #password - "password"
 
 INSERT INTO users (name, email, password)
-VALUES ('Admin', 'admin@gmail.com', '$2a$04$8SOUiYCsWJ5JYjmLlCX8E.MW9FVqGDflKD6amJ7zNzGq3Uw/fDJ66');
+VALUES ('Admin', 'admin@gmail.com', '$2a$04$8SOUiYCsWJ5JYjmLlCX8E.MW9FVqGDflKD6amJ7zNzGq3Uw/fDJ66'); #password - "admin"
 
 INSERT INTO user_roles (role, user_id) VALUES
   ('ROLE_USER', 1),
